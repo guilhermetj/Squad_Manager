@@ -1,11 +1,23 @@
+using Microsoft.EntityFrameworkCore;
+using Squad_Manager.Data;
+using Squad_Manager.Repository;
+using Squad_Manager.Repository.Interfaces;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<SquadManagerContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:Default"]);
+});
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
