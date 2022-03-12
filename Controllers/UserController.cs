@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Squad_Manager.Model.Dtos.UserDtos;
@@ -74,7 +75,7 @@ namespace Squad_Manager.Controllers
 
             return await _repository.SaveChangesAsync() ? Ok("User deleted successfully") : BadRequest("Error deleting User");
         }
-        [HttpPost("login")]
+        [HttpPost("login"), AllowAnonymous]
         public async Task<ActionResult<string>> Login(UserLoginDto loginDto)
         {
             var userBanco = await _repository.GetByEmail(loginDto.Email) ;
