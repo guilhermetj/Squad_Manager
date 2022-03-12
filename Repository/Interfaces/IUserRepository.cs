@@ -7,10 +7,10 @@ namespace Squad_Manager.Repository.Interfaces
     {
         Task<IEnumerable<UserDto>> Get();
         Task<User> GetById(int id);
+        Task<User> GetByEmail(string email);
         void Create(User user);
         void Update(User user);
         void Delete(User user);
-
         Task<bool> SaveChangesAsync();
     }
 }

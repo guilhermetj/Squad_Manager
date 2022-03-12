@@ -13,6 +13,8 @@ namespace Squad_Manager.Helpers
             CreateMap<UserCreateDto, User>(); //create
 
             CreateMap<UserUpdateDto, User>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null)); //edit
+
+            CreateMap<UserLoginDto, User>();
         }
     }
 }

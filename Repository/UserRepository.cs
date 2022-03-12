@@ -30,6 +30,12 @@ namespace Squad_Manager.Repository
                              .Where(x => x.Id == id)
                              .FirstOrDefaultAsync();
         }
+        public async Task<User> GetByEmail(string email)
+        {
+            return await _context.Users
+                             .Where(x => x.Email == email)
+                             .FirstOrDefaultAsync();
+        }
         public void Create(User user)
         {
             _context.Add(user);
