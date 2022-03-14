@@ -19,6 +19,7 @@ namespace Squad_Manager.Repository
             return await _context.Users
                       .Select(x => new UserDto
                       {
+                          Id = x.Id,
                           Email = x.Email,
                           Password = x.Password,
                       })

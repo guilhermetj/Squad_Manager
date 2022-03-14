@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Squad_Manager.Data;
 
@@ -11,9 +12,10 @@ using Squad_Manager.Data;
 namespace Squad_Manager.Migrations
 {
     [DbContext(typeof(SquadManagerContext))]
-    partial class SquadManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20220314032606_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

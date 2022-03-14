@@ -7,7 +7,6 @@ using Squad_Manager.Model.Entity;
 using Squad_Manager.Repository.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Squad_Manager.Controllers
@@ -42,7 +41,7 @@ namespace Squad_Manager.Controllers
 
             return userReturn != null ? Ok(userReturn) : NotFound("User not found");
         }
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> Post(UserCreateDto usercreateDto)
         {
             var user = _mapper.Map<User>(usercreateDto);
@@ -89,11 +88,11 @@ namespace Squad_Manager.Controllers
 
             return Ok(token);
         }
+
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtBearerTokenSettings:SecretKey"]));
@@ -107,5 +106,6 @@ namespace Squad_Manager.Controllers
 
             return jwt;
         }
+
     }
 }
