@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public int Leader { get; set; }
         public List<Person> Person { get; set; }
-        public List<Task> Task { get; set; }
+        public List<Model.Entity.Task> Task { get; set; }
     }
 }

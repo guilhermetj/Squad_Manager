@@ -1,8 +1,7 @@
 ﻿namespace Squad_Manager.Model.Dtos.TaskDtos
 {
-    public class TaskDto
+    public class TaskUpdateDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
