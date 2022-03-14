@@ -30,7 +30,8 @@ namespace Squad_Manager.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,9 +67,8 @@ namespace Squad_Manager.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Squad_Id = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    User_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,8 +80,8 @@ namespace Squad_Manager.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Persons_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Persons_Users_User_Id",
+                        column: x => x.User_Id,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -93,9 +93,9 @@ namespace Squad_Manager.Migrations
                 column: "Squad_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Persons_UserId",
+                name: "IX_Persons_User_Id",
                 table: "Persons",
-                column: "UserId");
+                column: "User_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_Squad_id",

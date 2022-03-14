@@ -7,6 +7,7 @@ namespace Squad_Manager.Model.Dtos.UserDtos
         [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Informe um email válido...")]
         public string? Email { get; set; }
 
+        public string? Name { get; set; }
         public string? Password { get; set; }
 
     }

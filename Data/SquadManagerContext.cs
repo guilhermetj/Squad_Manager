@@ -23,6 +23,7 @@ public class SquadManagerContext : DbContext
         builder.Entity<User>().Property(x => x.Password).IsRequired();
 
         builder.Entity<Person>().HasOne(x => x.Squad).WithMany(p => p.Person).HasForeignKey(x => x.Squad_Id);
+        builder.Entity<Person>().HasOne(x => x.User).WithMany(p => p.Person).HasForeignKey(x => x.User_Id);
 
         builder.Entity<Task>().HasOne(x => x.Squad).WithMany(p => p.Task).HasForeignKey(x => x.Squad_id);
     }
