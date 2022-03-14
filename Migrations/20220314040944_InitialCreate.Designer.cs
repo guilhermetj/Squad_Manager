@@ -12,7 +12,7 @@ using Squad_Manager.Data;
 namespace Squad_Manager.Migrations
 {
     [DbContext(typeof(SquadManagerContext))]
-    [Migration("20220314032606_InitialCreate")]
+    [Migration("20220314040944_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,12 +40,14 @@ namespace Squad_Manager.Migrations
                     b.Property<int>("Squad_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_id")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Squad_Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Persons");
                 });
@@ -110,7 +112,10 @@ namespace Squad_Manager.Migrations
             modelBuilder.Entity("Squad_Manager.Model.Entity.User", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -135,7 +140,15 @@ namespace Squad_Manager.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Squad_Manager.Model.Entity.User", "User")
+                        .WithMany("Person")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Squad");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Squad_Manager.Model.Entity.Task", b =>
@@ -149,28 +162,16 @@ namespace Squad_Manager.Migrations
                     b.Navigation("Squad");
                 });
 
-            modelBuilder.Entity("Squad_Manager.Model.Entity.User", b =>
-                {
-                    b.HasOne("Squad_Manager.Model.Entity.Person", "Person")
-                        .WithOne("User")
-                        .HasForeignKey("Squad_Manager.Model.Entity.User", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Squad_Manager.Model.Entity.Person", b =>
-                {
-                    b.Navigation("User")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Squad_Manager.Model.Entity.Squad", b =>
                 {
                     b.Navigation("Person");
 
                     b.Navigation("Task");
+                });
+
+            modelBuilder.Entity("Squad_Manager.Model.Entity.User", b =>
+                {
+                    b.Navigation("Person");
                 });
 #pragma warning restore 612, 618
         }

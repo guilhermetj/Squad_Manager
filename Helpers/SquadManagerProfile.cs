@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Squad_Manager.Model.Dtos.PersonDtos;
 using Squad_Manager.Model.Dtos.UserDtos;
 using Squad_Manager.Model.Entity;
 
@@ -9,6 +10,10 @@ namespace Squad_Manager.Helpers
         public SquadManagerProfile()
         {
             CreateMap<User, UserDto>(); //get
+
+            CreateMap<Person, PersonDto>();
+
+            CreateMap<Squad, SquadDto>();
 
             CreateMap<UserCreateDto, User>(); //create
 

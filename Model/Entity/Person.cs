@@ -6,7 +6,6 @@
         public string Name { get; set; }
         public int Squad_Id { get; set; }
         public Squad Squad { get; set; }
-        public int User_id { get; set; }
         public User User { get; set; }
     }
 }

@@ -22,11 +22,7 @@ public class SquadManagerContext : DbContext
         builder.Entity<User>().Property(x => x.Email).IsRequired();
         builder.Entity<User>().Property(x => x.Password).IsRequired();
 
-        builder.Entity<Person>().Property(x => x.User_id).IsRequired();
-        builder.Entity<Person>().HasOne(x => x.User).WithOne(p => p.Person).HasForeignKey<User>(x => x.Id);
         builder.Entity<Person>().HasOne(x => x.Squad).WithMany(p => p.Person).HasForeignKey(x => x.Squad_Id);
-
-        builder.Entity<Person>().Property(x => x.Squad_Id).IsRequired();
 
         builder.Entity<Task>().HasOne(x => x.Squad).WithMany(p => p.Task).HasForeignKey(x => x.Squad_id);
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Squad_Manager.Data;
+using Squad_Manager.Model.Dtos.PersonDtos;
 using Squad_Manager.Model.Dtos.UserDtos;
 using Squad_Manager.Model.Entity;
 using Squad_Manager.Repository.Interfaces;
@@ -14,20 +15,18 @@ namespace Squad_Manager.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<UserDto>> Get()
+        public async Task<IEnumerable<User>> Get()
         {
             return await _context.Users
-                      .Select(x => new UserDto
-                      {
-                          Id = x.Id,
-                          Email = x.Email,
-                          Password = x.Password,
-                      })
+                             .Include(x => x.Person)
+                             .ThenInclude(x => x.Squad)
                       .ToListAsync();
         }
         public async Task<User> GetById(int id)
         {
             return await _context.Users
+                             .Include(x => x.Person)
+                             .ThenInclude(x => x.Squad)
                              .Where(x => x.Id == id)
                              .FirstOrDefaultAsync();
         }

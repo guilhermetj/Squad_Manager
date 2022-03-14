@@ -29,7 +29,9 @@ namespace Squad_Manager.Controllers
         {
             var user = await _repository.Get();
 
-            return user.Any() ? Ok(user) : NoContent();
+            var userReturn = _mapper.Map<IEnumerable<UserDto>>(user);
+
+            return userReturn.Any() ? Ok(userReturn) : NoContent();
         }
 
         [HttpGet("{id}")]

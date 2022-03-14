@@ -24,24 +24,17 @@ namespace Squad_Manager.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Persons",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Squad_Id = table.Column<int>(type: "int", nullable: false),
-                    User_id = table.Column<int>(type: "int", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Persons", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Persons_Squads_Squad_Id",
-                        column: x => x.Squad_Id,
-                        principalTable: "Squads",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,20 +61,28 @@ namespace Squad_Manager.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Persons",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Squad_Id = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Persons", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Persons_Id",
-                        column: x => x.Id,
-                        principalTable: "Persons",
+                        name: "FK_Persons_Squads_Squad_Id",
+                        column: x => x.Squad_Id,
+                        principalTable: "Squads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Persons_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -92,6 +93,11 @@ namespace Squad_Manager.Migrations
                 column: "Squad_Id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Persons_UserId",
+                table: "Persons",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_Squad_id",
                 table: "Tasks",
                 column: "Squad_id");
@@ -100,13 +106,13 @@ namespace Squad_Manager.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Persons");
+
+            migrationBuilder.DropTable(
                 name: "Tasks");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Persons");
 
             migrationBuilder.DropTable(
                 name: "Squads");

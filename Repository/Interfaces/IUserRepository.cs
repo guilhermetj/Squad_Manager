@@ -5,7 +5,7 @@ namespace Squad_Manager.Repository.Interfaces
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<UserDto>> Get();
+        Task<IEnumerable<User>> Get();
         Task<User> GetById(int id);
         Task<User> GetByEmail(string email);
         void Create(User user);
