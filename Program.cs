@@ -23,6 +23,7 @@ builder.Services.AddDbContext<SquadManagerContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<ISquadRepository, SquadRepository>();
 
 builder.Services.AddAuthorization(options =>
 {

@@ -5,6 +5,6 @@ namespace Squad_Manager.Model.Dtos.PersonDtos
 {
     public class PersonDetailsDto
     {
-        public SquadDto Squad { get; set; }
+        public SquadDetailsDto Squad { get; set; }
     }
 }
