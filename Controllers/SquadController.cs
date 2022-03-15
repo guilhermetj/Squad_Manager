@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Squad_Manager.Model;
 using Squad_Manager.Model.Dtos.SquadDtos;
 using Squad_Manager.Model.Entity;
 using Squad_Manager.Repository.Interfaces;
@@ -12,11 +13,13 @@ namespace Squad_Manager.Controllers
     {
         private readonly ISquadRepository _repository;
         private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
-        public SquadController(ISquadRepository repository, IMapper mapper)
+        private readonly AuthenticatedUser _user;
+
+        public SquadController(ISquadRepository repository, IMapper mapper, AuthenticatedUser user)
         {
             _repository = repository;
             _mapper = mapper;
+            _user = user;
         }
 
         [HttpGet]
@@ -44,6 +47,7 @@ namespace Squad_Manager.Controllers
         public async Task<IActionResult> Create(SquadCreateDto squadcreateDto)
         {
             var squadAdd = _mapper.Map<Squad>(squadcreateDto);
+            var userAuth = _user.Email;
 
             _repository.Create(squadAdd);
 

@@ -12,7 +12,7 @@ using Squad_Manager.Data;
 namespace Squad_Manager.Migrations
 {
     [DbContext(typeof(SquadManagerContext))]
-    [Migration("20220314214808_InitialCreate")]
+    [Migration("20220315190932_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,8 +55,10 @@ namespace Squad_Manager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Leader")
-                        .HasColumnType("int");
+                    b.Property<string>("Leader")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
