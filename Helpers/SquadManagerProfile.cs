@@ -22,6 +22,7 @@ namespace Squad_Manager.Helpers
             // Person
             CreateMap<Person, PersonDto>();
             CreateMap<Person, PersonDetailsDto>();
+            CreateMap<Person, PersonSquadUser>();
             CreateMap<PersonCreateDto, Person>();
             CreateMap<PersonUpdateDto, Person>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null)); //edit
 

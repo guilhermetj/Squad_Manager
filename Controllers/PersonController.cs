@@ -26,7 +26,7 @@ namespace Squad_Manager.Controllers
         {
             var person = await _repository.Get();
 
-            var personReturn = _mapper.Map<IEnumerable<PersonDto>>(person);
+            var personReturn = _mapper.Map<IEnumerable<PersonSquadUser>>(person);
 
             return personReturn.Any() ? Ok(personReturn) : NoContent();
         }
@@ -38,7 +38,7 @@ namespace Squad_Manager.Controllers
             if (person == null)
                 return BadRequest("Person not found");
 
-            var personReturn = _mapper.Map<PersonDto>(person);
+            var personReturn = _mapper.Map<PersonSquadUser>(person);
 
             return Ok(personReturn);
         }

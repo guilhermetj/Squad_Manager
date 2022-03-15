@@ -16,6 +16,8 @@ namespace Squad_Manager.Repository
         {
             return await _context.Squads
                            .Include(x => x.Task)
+                           .Include(x => x.Person)
+                             .ThenInclude(x => x.User)
                            .ToListAsync();
         }
 
@@ -23,6 +25,8 @@ namespace Squad_Manager.Repository
         {
             return await _context.Squads
                            .Include(x => x.Task)
+                           .Include(x => x.Person)
+                           .ThenInclude(x => x.User)
                            .Where(x => x.Id == id)
                            .FirstOrDefaultAsync();
         }
