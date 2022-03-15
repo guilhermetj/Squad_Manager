@@ -12,7 +12,7 @@ using Squad_Manager.Data;
 namespace Squad_Manager.Migrations
 {
     [DbContext(typeof(SquadManagerContext))]
-    [Migration("20220315190932_InitialCreate")]
+    [Migration("20220315194622_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

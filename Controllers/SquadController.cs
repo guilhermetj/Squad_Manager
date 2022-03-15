@@ -47,9 +47,13 @@ namespace Squad_Manager.Controllers
         public async Task<IActionResult> Create(SquadCreateDto squadcreateDto)
         {
             var squadAdd = _mapper.Map<Squad>(squadcreateDto);
-            var userAuth = _user.Email;
-
-            _repository.Create(squadAdd);
+            var userAuth = _user.Name;
+            var squadnew = new Squad
+            {
+                Name = squadcreateDto.Name,
+                Leader = userAuth
+            };
+            _repository.Create(squadnew);
 
             return await _repository.SaveChangesAsync() ? Ok("Squad created successfully") : BadRequest("Error when creating Squad");
         }
